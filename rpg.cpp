@@ -14,11 +14,14 @@
 struct Personagem{
     std::string nome;
 
-    unsigned int energia;
+   unsigned int energia;
     unsigned int altura;
     unsigned int forcaFisica;
     unsigned int forcaMagica;
     unsigned int creditos;
+    unsigned int maestria;
+    unsigned int feitico;
+    unsigned int socializacao;
 };
 
 float geraAleatorio(){
@@ -49,6 +52,9 @@ struct Personagem boasVindasDoJogo(){
     eu.forcaFisica = geraAleatorio() * 100;
     eu.forcaMagica = geraAleatorio() * 50;
     eu.creditos = 26;
+    eu.maestria =geraAleatorio() *1000;
+    eu.feitico =0;
+    eu.socializacao =geraAleatorio() *300;
 
     return eu;
 }
@@ -60,10 +66,10 @@ void mostraStatusDoJogador(struct Personagem &p){
         return;
     }
 
-    std::cout << "Você agora tem " << p.altura/100.0 <<
-                " metros de altura, " << p.energia << " de energia com uma força de intensidade " <<
-                p.forcaFisica << " e um poder mágico de " <<
-                p.forcaMagica << " orbites $" << p.creditos << std::endl;
+    std::cout << "Você agora tem " <<p.feitico  << "\n" "pontos de feitico" "\n" << p.altura/100.0 <<
+                " metros de altura, " "\n"  << p.energia << " de energia com uma força de intensidade "  <<
+                p.forcaFisica << "\n" " e um poder mágico de " <<
+                p.forcaMagica  <<"seu nivel de maestria é"  <<p.maestria<<" e voce possui" << std::endl;
 }
 
 void faseDaCidade(struct Personagem &p){
@@ -158,6 +164,111 @@ void faseDaCidade(struct Personagem &p){
     }
 }
 
+void faseDeHogwarts (struct Personagem &p){
+    
+    unsigned int opcao = 0;
+
+      while(opcao < 1 || opcao > 2){
+        std::cout << "Você foi enviado a Hogwarts pela Academia Braisileira de Bruxos(as) para aperfeiçoar seus pontos mágicos , ao chegar lá você se depara com o Diretor Que lhe pergunta para qual Casa de Bruxos quer entrar....\n Para qual casa você deseja ir?" << std::endl;
+        std::cout << "1-Grifinoria\n2-Sonserina" << std::endl;
+      
+        std::cin >> opcao;
+      }
+
+      if(opcao == 1){
+        std::cout << "Parabéns você agora faz parte da familia Grifinoria, O que deseja fazer agora?" << std::endl;
+        
+        std::cout << "1-Nada\n2-Comprar Várinha \n3-Treinar Feitiços" << std::endl;
+        std::cin >> opcao;
+
+      if(opcao == 2){
+
+            opcao = 0;
+
+      while(opcao < 1 || opcao > 2){
+                std::cout << "1-Alder Amieiro (Leve e boa para manuzeio)\n2-Cedar Cedro (Muito Poderosa e dificil pra manuzear)" << std::endl;
+                std::cin >> opcao;
+    }
+
+      switch(opcao){
+            case 1:
+                    if(p.creditos >= 10){
+                        p.maestria += 20;
+                        p.feitico += 10;
+                        p.creditos -= 10;
+                    }else{
+                        std::cout << "Desculpe mas você não possui créditos suficientes para comprar isso..."  << std::endl;
+                    }
+                    break;
+            case 2:
+                    if(p.creditos >= 50){
+                        p.maestria += 75;
+                        p.feitico += 33;
+                        p.creditos -= 50;
+                    }else{
+                        std::cout << "Desculpe mas você não possui créditos suficientes para comprar isso..." << std::endl;
+                    }
+                    break;
+            }
+            return;
+
+        }else if(opcao == 3){
+            std::cout << "Ora ora parece que você ainda não tem varinha para treinar seus  feitiços compre uma e volte aqui " << std::endl;
+           
+
+
+            return;
+        }else{
+            std::cout << "Novatos sempre dando trabalho!!!....";
+        }
+
+     if(opcao == 2){
+        std::cout << "Parabéns você agora faz parte da familia Sonserina, Você está pronto para aprender sobre como voar em uma vassoura? Para onde desejas ir?" << std::endl;
+        
+        std::cout << "1-Ficar Aqui \n2-Ir ao Biblioteca  \n3-Ir ao Refeitorio Comer algo" << std::endl;
+        std::cin >> opcao;
+
+      if(opcao == 2){
+
+            opcao = 0;
+      } 
+      while(opcao < 1 || opcao > 2){
+                std::cout << "1-Ler um Livro Referente a Magia \n 2-Sair ir para outro lugar" << std::endl;
+                std::cin >> opcao;
+
+                switch(opcao){
+            case 1:
+                    if(p.feitico +=25)
+                       p.maestria +=10;
+                    
+                   
+                    break;
+                
+            case 2:
+                 std::cout << "Ok vamos a outro lugar" << std::endl;
+                 
+                    break;
+                }    
+            return;
+                
+            
+            
+             if (opcao == 3){
+               while(opcao < 1 || opcao > 2)
+                std::cout << "1-Maça \n 2-Sopa de Batatas " << std::endl;
+                std::cin >> opcao;
+               
+               switch(opcao){
+            case 1:
+                   (p.forcaFisica= p.forcaFisica + p.forcaFisica);
+                    break;
+            case 2:
+                   (p.forcaFisica= p.forcaFisica + p.forcaFisica);
+                    break;
+               
+            return;
+        }
+
 int main(int argc, char** argv)
 {
     // s = seed rand = aleatório                                                
@@ -172,6 +283,8 @@ int main(int argc, char** argv)
     mostraStatusDoJogador(j);
 
     faseDaCidade(j);
+
+    faseDeHogwarts(j);
 
     mostraStatusDoJogador(j);
 }
